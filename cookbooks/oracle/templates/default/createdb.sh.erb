@@ -1,0 +1,8 @@
+:
+export ORAENV_ASK=NO ORACLE_SID=BAN83
+. /usr/local/bin/oraenv
+export ORAENV_ASK=
+cd /u02/oradata/BAN83
+rm TEMP01.DBF
+rm *.CTL
+sqlplus / as sysdba @createdb
