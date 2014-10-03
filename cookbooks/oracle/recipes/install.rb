@@ -1,18 +1,18 @@
-directory "/u02/oradata/BAN83" do
+directory "/u02/oradata/#{node[:sid]}" do
   owner "oracle"
   group "dba"
   mode "0744"
   recursive true
 end
 
-directory "/u01/app/oracle/admin/BAN83/adump" do
+directory "/u01/app/oracle/admin/#{node[:sid]}/adump" do
   owner "oracle"
   group "dba"
   mode "0744"
   recursive true
 end
 
-directory "/u01/app/oracle/admin/BAN83/dpdump" do
+directory "/u01/app/oracle/admin/#{node[:sid]}/dpdump" do
   owner "oracle"
   group "dba"
   mode "0744"
@@ -29,24 +29,24 @@ execute "chown_u02" do
   user "root"
 end
 
-template "/u01/app/oracle/product/11.2.0/dbhome_1/dbs/initBAN83.ora" do
+template "/u01/app/oracle/product/11.2.0/dbhome_1/dbs/init#{node[:sid]}.ora" do
   owner "oracle"
   group "dba"
   mode "0644"
-  source "initBAN83.ora.erb"
+  source "init.ora.erb"
 end
 
-remote_directory "/u02/oradata/BAN83" do
+remote_directory "/u02/oradata/#{node[:sid]}" do
   files_owner 'oracle'
   owner 'oracle'
   group 'dba'
-  source "ban83"
+  source "#{node[:sid]}"
 end
 
 execute "gunzip" do 
   command "gunzip *.gz"
   user "oracle"
-  cwd "/u02/oradata/BAN83"
+  cwd "/u02/oradata/#{node[:sid]}"
 end
 
 template "/etc/oratab" do
@@ -56,14 +56,14 @@ template "/etc/oratab" do
   source "oratab.erb"
 end
 
-template "/u02/oradata/BAN83/createdb.sql" do
-  mode "0644"
-  owner "oracle"
-  group "dba"
-  source "createdb.sql.erb"
-end
+#template "/u02/oradata/#{node[:sid]}/createdb.sql" do
+#  mode "0644"
+#  owner "oracle"
+#  group "dba"
+#  source "createdb.sql.erb"
+#end
 
-template "/u02/oradata/BAN83/createdb.sh" do
+template "/u02/oradata/#{node[:sid]}/createdb.sh" do
   mode "0755"
   owner "oracle"
   group "dba"
@@ -77,7 +77,7 @@ template "/u01/app/oracle/product/11.2.0/dbhome_1/network/admin/listener.ora" do
 end  
 
 execute "install" do 
-  command "su -l -c 'cd /u02/oradata/BAN83 && ./createdb.sh' oracle"
+  command "su -l -c 'cd /u02/oradata/#{node[:sid]} && ./createdb.sh' oracle"
   user "root"
 end
 

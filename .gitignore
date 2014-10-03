@@ -5,6 +5,7 @@
 # Vagrant stuff
 boxes/*
 /.vagrant
+/cookbooks/oracle/files/default/*
 
 .DS_Store
 .DS_Store?

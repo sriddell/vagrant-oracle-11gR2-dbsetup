@@ -1,0 +1,23 @@
+<%= node["sid"] %>.__db_cache_size=142606336
+<%= node["sid"] %>.__java_pool_size=4194304
+<%= node["sid"] %>.__large_pool_size=8388608
+<%= node["sid"] %>.__oracle_base='/u01/app/oracle'#ORACLE_BASE set from environment
+<%= node["sid"] %>.__pga_aggregate_target=150994944
+<%= node["sid"] %>.__sga_target=268435456
+<%= node["sid"] %>.__shared_io_pool_size=0
+<%= node["sid"] %>.__shared_pool_size=100663296
+<%= node["sid"] %>.__streams_pool_size=0
+*.audit_file_dest='/u01/app/oracle/admin/<%= node["sid"] %>/adump'
+*.audit_trail='db'
+*.compatible='11.2.0.4.0'
+*.control_files='/u02/oradata/<%= node["sid"] %>/CONTROL01.CTL','/u02/oradata/<%= node["sid"] %>/CONTROL02.CTL','/u02/oradata/<%= node["sid"] %>/CONTROL03.CTL'
+*.db_block_size=8192
+*.db_domain=''
+*.db_name='<%= node["sid"] %>'
+*.diagnostic_dest='/u01/app/oracle'
+*.dispatchers='(PROTOCOL=TCP) (SERVICE=<%= node["sid"] %>XDB)'
+*.memory_target=417333248
+*.open_cursors=300
+*.processes=150
+*.remote_login_passwordfile='EXCLUSIVE'
+*.undo_tablespace='UNDOTBS1'

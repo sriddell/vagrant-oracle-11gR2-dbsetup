@@ -1,8 +1,8 @@
 :
-export ORAENV_ASK=NO ORACLE_SID=BAN83
+export ORAENV_ASK=NO ORACLE_SID=<%= node["sid"] %>
 . /usr/local/bin/oraenv
 export ORAENV_ASK=
-cd /u02/oradata/BAN83
+cd /u02/oradata/<%= node["sid"] %>
 rm TEMP01.DBF
 rm *.CTL
 sqlplus / as sysdba @createdb
